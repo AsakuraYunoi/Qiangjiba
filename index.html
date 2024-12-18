@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>强基八班</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif; /* 更现代的字体 */
+            margin: 20px;
+            background-color: #f4f4f4; /* 浅灰色背景 */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 调整最小宽度，更灵活 */
+            grid-gap: 20px;
+            padding: 20px;
+            background-color: #fff; /* 白色背景 */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 更柔和的阴影 */
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px; /* 更大的圆角 */
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15); /* 更深的阴影 */
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* box-shadow 也添加过渡 */
+        }
+
+        .gallery img:hover {
+            transform: scale(1.03);
+            box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2); /* 更明显的阴影 */
+        }
+
+        /* 全屏预览样式 */
+        .fullscreen-overlay {
+            display: none; /* 初始隐藏 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* 半透明黑色背景 */
+            z-index: 9999; /* 确保在最上层 */
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            overflow: auto; /* 如果图片过大，允许滚动 */
+        }
+
+        .fullscreen-image {
+            max-width: 90%;
+            max-height: 90%;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            z-index: 10000;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>强！基！八！班！</h1>
+    
+    <div class="gallery" id="imageGallery"></div>
+
+    <div class="fullscreen-overlay" id="fullscreenOverlay">
+        <span class="close-button" onclick="closeFullscreen()">&times;</span>
+        <img class="fullscreen-image" id="fullscreenImage" src="" alt="全屏图片">
+    </div>
+
+    <script>
+        const imageGallery = document.getElementById('imageGallery');
+        const fullscreenOverlay = document.getElementById('fullscreenOverlay');
+        const fullscreenImage = document.getElementById('fullscreenImage');
+        const imagePaths = [
+            "images/1.png",
+            "images/2.png",
+            "images/3.png",
+            "images/4.png",
+            "images/5.png",
+            "images/6.png",
+            "images/7.png",
+            "images/8.png",
+            "images/9.png",
+            "images/10.png",
+            "images/11.png",
+            "images/12.png",
+             // ... 更多图片路径
+        ];
+
+        imagePaths.forEach(path => {
+            const img = document.createElement('img');
+            img.src = path;
+            img.alt = "校园生活照片";
+            img.onclick = () => openFullscreen(path); // 添加点击事件
+            imageGallery.appendChild(img);
+        });
+
+        function openFullscreen(path) {
+            fullscreenImage.src = path;
+            fullscreenOverlay.style.display = "flex"; // 使用 flex 布局居中
+        }
+
+        function closeFullscreen() {
+            fullscreenOverlay.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
